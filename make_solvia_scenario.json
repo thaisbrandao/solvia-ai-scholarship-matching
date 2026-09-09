@@ -1,0 +1,1219 @@
+{
+  "name": "solvia.app",
+  "flow": [
+    {
+      "id": 14,
+      "module": "airtable:TriggerWatchRecords",
+      "version": 3,
+      "parameters": {
+        "__IMTCONN__": 11851983,
+        "base": "YOUR_AIRTABLE_BASE_ID",
+        "useColumnId": false,
+        "table": "tblytOnTdFOpoCLK6",
+        "config": {
+          "triggerField": "createdTime",
+          "labelField": "createdTime"
+        },
+        "maxRecords": 2,
+        "formula": ""
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": -435,
+          "y": 0
+        },
+        "restore": {
+          "parameters": {
+            "__IMTCONN__": {
+              "label": "solvia.app",
+              "data": {
+                "scoped": "true",
+                "connection": "airtable2"
+              }
+            },
+            "base": {
+              "label": "Solvia.app"
+            },
+            "table": {
+              "label": "Usuários"
+            },
+            "config": {
+              "nested": {
+                "triggerField": {
+                  "label": "createdTime"
+                },
+                "labelField": {
+                  "label": "createdTime"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:airtable3,airtable2",
+            "label": "Connection",
+            "required": true
+          },
+          {
+            "name": "base",
+            "type": "select",
+            "label": "Base",
+            "required": true
+          },
+          {
+            "name": "useColumnId",
+            "type": "boolean",
+            "label": "Use Column ID",
+            "required": true
+          },
+          {
+            "name": "table",
+            "type": "select",
+            "label": "Table",
+            "required": true
+          },
+          {
+            "name": "config",
+            "type": "collection",
+            "label": "Trigger configuration",
+            "spec": [
+              {
+                "name": "triggerField",
+                "type": "select",
+                "label": "Trigger field",
+                "required": true
+              },
+              {
+                "name": "triggerField",
+                "type": "hidden"
+              },
+              {
+                "name": "labelField",
+                "type": "select",
+                "label": "Label field",
+                "required": true
+              }
+            ]
+          },
+          {
+            "name": "maxRecords",
+            "type": "integer",
+            "label": "Limit",
+            "required": true
+          },
+          {
+            "name": "view",
+            "type": "select",
+            "label": "View"
+          },
+          {
+            "name": "formula",
+            "type": "text",
+            "label": "Formula"
+          }
+        ],
+        "interface": [
+          {
+            "name": "id",
+            "type": "text",
+            "label": "ID"
+          },
+          {
+            "name": "createdTime",
+            "label": "createdTime",
+            "type": "text"
+          },
+          {
+            "name": "Nome",
+            "label": "Nome",
+            "type": "text"
+          },
+          {
+            "name": "Idade",
+            "label": "Idade",
+            "type": "number"
+          },
+          {
+            "name": "Gênero",
+            "label": "Gênero",
+            "type": "text"
+          },
+          {
+            "name": "Cor/Raça",
+            "label": "Cor/Raça",
+            "type": "text"
+          },
+          {
+            "name": "Escolaridade",
+            "label": "Escolaridade",
+            "type": "text"
+          },
+          {
+            "name": "Área de interesse",
+            "label": "Área de interesse",
+            "type": "text"
+          },
+          {
+            "name": "Renda familiar",
+            "label": "Renda familiar",
+            "type": "text"
+          },
+          {
+            "name": "País de interesse",
+            "label": "País de interesse",
+            "type": "text"
+          },
+          {
+            "name": "Idiomas",
+            "label": "Idiomas",
+            "type": "array",
+            "editable": true,
+            "dynamic": true
+          },
+          {
+            "name": "Oportunidades Candidatadas",
+            "label": "Oportunidades Candidatadas",
+            "type": "array",
+            "spec": {
+              "label": "Record ID"
+            }
+          },
+          {
+            "name": "Idade (Faixa)",
+            "label": "Idade (Faixa)",
+            "type": "text"
+          },
+          {
+            "name": "Total de Oportunidades Candidatadas",
+            "label": "Total de Oportunidades Candidatadas",
+            "type": "number"
+          },
+          {
+            "name": "Última Oportunidade Candidatada",
+            "label": "Última Oportunidade Candidatada",
+            "type": "array"
+          },
+          {
+            "name": "Resumo do Perfil (IA)",
+            "label": "Resumo do Perfil (IA)",
+            "type": "text"
+          },
+          {
+            "name": "Sugestão de Próxima Área de Interesse (IA)",
+            "label": "Sugestão de Próxima Área de Interesse (IA)",
+            "type": "text"
+          },
+          {
+            "name": "MATCH IA",
+            "label": "MATCH IA",
+            "type": "text"
+          }
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "module": "builtin:BasicFeeder",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "array": "{{`14`}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": -148,
+          "y": -6
+        },
+        "restore": {
+          "expect": {
+            "array": {
+              "mode": "edit"
+            }
+          }
+        },
+        "expect": [
+          {
+            "name": "array",
+            "type": "array",
+            "label": "Array",
+            "mode": "edit",
+            "spec": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "module": "airtable:ActionSearchRecords",
+      "version": 3,
+      "parameters": {
+        "__IMTCONN__": 11642415
+      },
+      "mapper": {
+        "base": "YOUR_AIRTABLE_BASE_ID",
+        "useColumnId": false,
+        "table": "tblEDJqcBWvNBoZii",
+        "maxRecords": "2"
+      },
+      "metadata": {
+        "designer": {
+          "x": 134,
+          "y": -17,
+          "name": "Oportunidades en Airtable"
+        },
+        "restore": {
+          "parameters": {
+            "__IMTCONN__": {
+              "label": "airtable",
+              "data": {
+                "scoped": "true",
+                "connection": "airtable2"
+              }
+            }
+          },
+          "expect": {
+            "base": {
+              "mode": "chose",
+              "label": "Oportunidades Educacionais"
+            },
+            "useColumnId": {
+              "mode": "chose"
+            },
+            "table": {
+              "mode": "chose",
+              "label": "Oportunidades"
+            },
+            "sort": {
+              "mode": "chose"
+            },
+            "view": {
+              "mode": "chose"
+            },
+            "fields": {
+              "mode": "chose"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:airtable3,airtable2",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "base",
+            "type": "select",
+            "label": "Base",
+            "required": true
+          },
+          {
+            "name": "useColumnId",
+            "type": "boolean",
+            "label": "Use Column ID",
+            "required": true
+          },
+          {
+            "name": "table",
+            "type": "select",
+            "label": "Table",
+            "required": true
+          },
+          {
+            "name": "formula",
+            "type": "text",
+            "label": "Formula"
+          },
+          {
+            "name": "maxRecords",
+            "type": "integer",
+            "label": "Limit"
+          },
+          {
+            "name": "sort",
+            "type": "array",
+            "label": "Sort",
+            "spec": [
+              {
+                "name": "field",
+                "type": "select",
+                "label": "Field",
+                "options": [],
+                "dynamic": true
+              },
+              {
+                "name": "direction",
+                "type": "select",
+                "label": "Direction",
+                "options": [
+                  {
+                    "label": "Descending",
+                    "value": "desc"
+                  },
+                  {
+                    "label": "Ascending",
+                    "value": "asc"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "view",
+            "type": "select",
+            "label": "View"
+          },
+          {
+            "name": "fields",
+            "type": "select",
+            "label": "Output Fields",
+            "multiple": true
+          }
+        ],
+        "interface": [
+          {
+            "name": "__IMTLENGTH__",
+            "label": "Total number of bundles",
+            "type": "uinteger"
+          },
+          {
+            "name": "__IMTINDEX__",
+            "label": "Bundle order position",
+            "type": "uinteger"
+          },
+          {
+            "name": "id",
+            "type": "text",
+            "label": "ID"
+          },
+          {
+            "name": "createdTime",
+            "type": "date",
+            "label": "Created Time"
+          },
+          {
+            "name": "Created time",
+            "label": "Created time",
+            "type": "text"
+          },
+          {
+            "name": "Copia de Nome",
+            "label": "Copia de Nome",
+            "type": "text"
+          },
+          {
+            "name": "Tipo",
+            "label": "Tipo",
+            "type": "text"
+          },
+          {
+            "name": "País/Cidade",
+            "label": "País/Cidade",
+            "type": "text"
+          },
+          {
+            "name": "Área de estudo",
+            "label": "Área de estudo",
+            "type": "text"
+          },
+          {
+            "name": "Requisitos",
+            "label": "Requisitos",
+            "type": "text",
+            "multiline": true
+          },
+          {
+            "name": "Benefícios",
+            "label": "Benefícios",
+            "type": "text",
+            "multiline": true
+          },
+          {
+            "name": "Link inscrição",
+            "label": "Link inscrição",
+            "type": "text"
+          },
+          {
+            "name": "Compatibilidade",
+            "label": "Compatibilidade",
+            "type": "text"
+          },
+          {
+            "name": "Usuários Candidatados",
+            "label": "Usuários Candidatados",
+            "type": "array",
+            "spec": {
+              "label": "Record ID"
+            }
+          },
+          {
+            "name": "Nº de Candidatos",
+            "label": "Nº de Candidatos",
+            "type": "number"
+          },
+          {
+            "name": "Resumo dos Benefícios",
+            "label": "Resumo dos Benefícios",
+            "type": "text"
+          },
+          {
+            "name": "Requisitos Principais",
+            "label": "Requisitos Principais",
+            "type": "text"
+          },
+          {
+            "name": "Compatibilidade (IA)",
+            "label": "Compatibilidade (IA)",
+            "type": "text"
+          },
+          {
+            "name": "Categoria da Oportunidade (IA)",
+            "label": "Categoria da Oportunidade (IA)",
+            "type": "text"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "module": "builtin:BasicFeeder",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "array": [
+          "{{3.id}} {{3.`__IMTINDEX__`}} {{3.Nome}} {{3.`País/Cidade`}} {{3.`Área de estudo`}} {{3.Requisitos}}"
+        ]
+      },
+      "metadata": {
+        "designer": {
+          "x": 454,
+          "y": -12,
+          "name": "busqueda oportunidades"
+        },
+        "restore": {
+          "expect": {
+            "array": {
+              "mode": "chose",
+              "items": [
+                null
+              ]
+            }
+          }
+        },
+        "expect": [
+          {
+            "mode": "edit",
+            "name": "array",
+            "spec": [],
+            "type": "array",
+            "label": "Array"
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "module": "util:SetVariable2",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "name": "replace",
+        "scope": "roundtrip",
+        "value": ""
+      },
+      "metadata": {
+        "designer": {
+          "x": 778,
+          "y": -20,
+          "name": "variables becas & usuarios"
+        },
+        "restore": {
+          "expect": {
+            "scope": {
+              "label": "One cycle"
+            }
+          }
+        },
+        "expect": [
+          {
+            "name": "name",
+            "type": "text",
+            "label": "Variable name",
+            "required": true
+          },
+          {
+            "name": "scope",
+            "type": "select",
+            "label": "Variable lifetime",
+            "required": true,
+            "validate": {
+              "enum": [
+                "roundtrip",
+                "execution"
+              ]
+            }
+          },
+          {
+            "name": "value",
+            "type": "any",
+            "label": "Variable value"
+          }
+        ],
+        "interface": [
+          {
+            "name": "replace",
+            "type": "any",
+            "label": "replace"
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": {
+        "handleErrors": true,
+        "useNewZLibDeCompress": true
+      },
+      "mapper": {
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "serializeUrl": false,
+        "method": "post",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer YOUR_GROQ_API_KEY"
+          }
+        ],
+        "qs": [],
+        "bodyType": "raw",
+        "parseResponse": false,
+        "authUser": "",
+        "authPass": "",
+        "timeout": "",
+        "shareCookies": false,
+        "ca": "",
+        "rejectUnauthorized": true,
+        "followRedirect": true,
+        "useQuerystring": false,
+        "gzip": true,
+        "useMtls": false,
+        "contentType": "application/json",
+        "data": "{\r\n \"model\": \"llama-3.3-70b-versatile\"\r\n,\r\n  \"messages\": [\r\n    {\r\n      \"role\": \"system\",\r\n      \"content\": \"Você é um sistema que analisa compatibilidade entre estudantes e bolsas de estudo.\"\r\n    },\r\n    {\r\n      \"role\": \"user\",\r\n      \"content\": \"Perfil do estudante:\\n- Nome: {{14.Nome}}\\n- Idade: {{14.Idade}}\\n- País: {{14.`País de interesse`}}\\n- Curso: {{14.Escolaridade}}\\n- Renda: {{14.`Renda familiar`}}\\n- Idiomas: {{14.Idiomas}}\\n\\nBolsa:\\n- Nome: {{3.Nome}}\\n- País destino: {{3.`País/Cidade`}}\\n- Área: {{3.`Área de estudo`}}\\n- Nível: {{3.Tipo}}\\n- Requisitos: {{3.Requisitos}}\\n\\nResponda somente em JSON:\\n{\\n  \\\"match\\\": porcentagem de 20 a 95,\\n  \\\"comentario\\\": \\\"explicação curta em tópicos dos requisitos que deram match com o perfil\\\"\\n}\"\r\n    }\r\n  ],\r\n  \"max_tokens\": 300\r\n}",
+        "followAllRedirects": false
+      },
+      "metadata": {
+        "designer": {
+          "x": 1144,
+          "y": -18,
+          "name": "Match de perfil + becas con IA"
+        },
+        "restore": {
+          "expect": {
+            "method": {
+              "mode": "chose",
+              "label": "POST"
+            },
+            "headers": {
+              "mode": "chose",
+              "items": [
+                null
+              ]
+            },
+            "qs": {
+              "mode": "chose"
+            },
+            "bodyType": {
+              "label": "Raw"
+            },
+            "contentType": {
+              "label": "JSON (application/json)"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "handleErrors",
+            "type": "boolean",
+            "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+            "required": true
+          },
+          {
+            "name": "useNewZLibDeCompress",
+            "type": "hidden"
+          }
+        ],
+        "expect": [
+          {
+            "name": "url",
+            "type": "url",
+            "label": "URL",
+            "required": true
+          },
+          {
+            "name": "serializeUrl",
+            "type": "boolean",
+            "label": "Serialize URL",
+            "required": true
+          },
+          {
+            "name": "method",
+            "type": "select",
+            "label": "Method",
+            "required": true,
+            "validate": {
+              "enum": [
+                "get",
+                "head",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "options"
+              ]
+            }
+          },
+          {
+            "name": "headers",
+            "type": "array",
+            "label": "Headers",
+            "spec": [
+              {
+                "name": "name",
+                "label": "Name",
+                "type": "text",
+                "required": true
+              },
+              {
+                "name": "value",
+                "label": "Value",
+                "type": "text"
+              }
+            ]
+          },
+          {
+            "name": "qs",
+            "type": "array",
+            "label": "Query String",
+            "spec": [
+              {
+                "name": "name",
+                "label": "Name",
+                "type": "text",
+                "required": true
+              },
+              {
+                "name": "value",
+                "label": "Value",
+                "type": "text"
+              }
+            ]
+          },
+          {
+            "name": "bodyType",
+            "type": "select",
+            "label": "Body type",
+            "validate": {
+              "enum": [
+                "raw",
+                "x_www_form_urlencoded",
+                "multipart_form_data"
+              ]
+            }
+          },
+          {
+            "name": "parseResponse",
+            "type": "boolean",
+            "label": "Parse response",
+            "required": true
+          },
+          {
+            "name": "authUser",
+            "type": "text",
+            "label": "User name"
+          },
+          {
+            "name": "authPass",
+            "type": "password",
+            "label": "Password"
+          },
+          {
+            "name": "timeout",
+            "type": "uinteger",
+            "label": "Timeout",
+            "validate": {
+              "max": 300,
+              "min": 1
+            }
+          },
+          {
+            "name": "shareCookies",
+            "type": "boolean",
+            "label": "Share cookies with other HTTP modules",
+            "required": true
+          },
+          {
+            "name": "ca",
+            "type": "cert",
+            "label": "Self-signed certificate"
+          },
+          {
+            "name": "rejectUnauthorized",
+            "type": "boolean",
+            "label": "Reject connections that are using unverified (self-signed) certificates",
+            "required": true
+          },
+          {
+            "name": "followRedirect",
+            "type": "boolean",
+            "label": "Follow redirect",
+            "required": true
+          },
+          {
+            "name": "useQuerystring",
+            "type": "boolean",
+            "label": "Disable serialization of multiple same query string keys as arrays",
+            "required": true
+          },
+          {
+            "name": "gzip",
+            "type": "boolean",
+            "label": "Request compressed content",
+            "required": true
+          },
+          {
+            "name": "useMtls",
+            "type": "boolean",
+            "label": "Use Mutual TLS",
+            "required": true
+          },
+          {
+            "name": "contentType",
+            "type": "select",
+            "label": "Content type",
+            "validate": {
+              "enum": [
+                "text/plain",
+                "application/json",
+                "application/xml",
+                "text/xml",
+                "text/html",
+                "custom"
+              ]
+            }
+          },
+          {
+            "name": "data",
+            "type": "buffer",
+            "label": "Request content"
+          },
+          {
+            "name": "followAllRedirects",
+            "type": "boolean",
+            "label": "Follow all redirect",
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "module": "json:ParseJSON",
+      "version": 1,
+      "parameters": {
+        "type": 432930
+      },
+      "mapper": {
+        "json": "{\r\n  \"match\": \"85%\",\r\n  \"comentario\": \"Você se encaixa porque atende aos requisitos de idioma (Inglês avançado), área de interesse (Engenharia) e nível de escolaridade exigido.\"\r\n}\r\n\r\n​"
+      },
+      "metadata": {
+        "designer": {
+          "x": 1483,
+          "y": -21,
+          "name": "match en %"
+        },
+        "restore": {
+          "parameters": {
+            "type": {
+              "label": "My data structure"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "type": "udt",
+            "label": "Data structure"
+          }
+        ],
+        "expect": [
+          {
+            "name": "json",
+            "type": "text",
+            "label": "JSON string",
+            "required": true
+          }
+        ],
+        "interface": [
+          {
+            "help": "",
+            "name": "match",
+            "type": "number",
+            "label": null,
+            "default": null,
+            "required": false
+          },
+          {
+            "help": "",
+            "name": "comentario",
+            "type": "text",
+            "label": null,
+            "default": null,
+            "required": false,
+            "multiline": false
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "module": "airtable:ActionCreateRecord",
+      "version": 3,
+      "parameters": {
+        "__IMTCONN__": 11642415
+      },
+      "mapper": {
+        "base": "YOUR_AIRTABLE_BASE_ID",
+        "typecast": false,
+        "useColumnId": false,
+        "table": "tblEDJqcBWvNBoZii",
+        "record": {
+          "fldeYeGIc2bCqp1zK": "{{6.match}} {{6.comentario}}"
+        }
+      },
+      "metadata": {
+        "designer": {
+          "x": 1837,
+          "y": -26,
+          "name": "Match + requisitos"
+        },
+        "restore": {
+          "parameters": {
+            "__IMTCONN__": {
+              "label": "airtable",
+              "data": {
+                "scoped": "true",
+                "connection": "airtable2"
+              }
+            }
+          },
+          "expect": {
+            "base": {
+              "label": "Oportunidades Educacionais"
+            },
+            "typecast": {
+              "mode": "chose"
+            },
+            "useColumnId": {
+              "mode": "chose"
+            },
+            "table": {
+              "nested": [
+                {
+                  "name": "record",
+                  "spec": [
+                    {
+                      "name": "fldRvFocvp7Q8NjkB",
+                      "type": "text",
+                      "label": "Nome"
+                    },
+                    {
+                      "mode": "edit",
+                      "name": "fldam6Aqd6PG9nibA",
+                      "type": "select",
+                      "label": "Tipo",
+                      "dynamic": true,
+                      "options": [
+                        {
+                          "label": "Bolsa",
+                          "value": "Bolsa"
+                        },
+                        {
+                          "label": "Curso",
+                          "value": "Curso"
+                        },
+                        {
+                          "label": "Programa",
+                          "value": "Programa"
+                        }
+                      ],
+                      "validate": false
+                    },
+                    {
+                      "name": "fldsrM0YMYqTh8JgX",
+                      "type": "text",
+                      "label": "País/Cidade"
+                    },
+                    {
+                      "name": "fldPMsYEo4nSHpn0b",
+                      "type": "text",
+                      "label": "Área de estudo"
+                    },
+                    {
+                      "name": "fldIEv5HEy90QrAez",
+                      "type": "text",
+                      "label": "Requisitos",
+                      "multiline": true
+                    },
+                    {
+                      "name": "fldmJaFvrtCYJ2GZA",
+                      "type": "text",
+                      "label": "Benefícios",
+                      "multiline": true
+                    },
+                    {
+                      "name": "fldlMvL7ukJF9N70d",
+                      "type": "text",
+                      "label": "Link inscrição"
+                    },
+                    {
+                      "name": "fldeYeGIc2bCqp1zK",
+                      "type": "text",
+                      "label": "Compatibilidade"
+                    },
+                    {
+                      "name": "fldJY7JdSEYmeZ04G",
+                      "spec": {
+                        "label": "Record ID"
+                      },
+                      "type": "array",
+                      "label": "Usuários Candidatados"
+                    }
+                  ],
+                  "type": "collection",
+                  "label": "Record"
+                }
+              ],
+              "label": "Oportunidades"
+            },
+            "record": {
+              "nested": {
+                "fldam6Aqd6PG9nibA": {
+                  "mode": "edit"
+                },
+                "fldJY7JdSEYmeZ04G": {
+                  "mode": "chose"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "__IMTCONN__",
+            "type": "account:airtable3,airtable2",
+            "label": "Connection",
+            "required": true
+          }
+        ],
+        "expect": [
+          {
+            "name": "base",
+            "type": "select",
+            "label": "Base",
+            "required": true
+          },
+          {
+            "name": "typecast",
+            "type": "boolean",
+            "label": "Smart links",
+            "required": true
+          },
+          {
+            "name": "useColumnId",
+            "type": "boolean",
+            "label": "Use Column ID",
+            "required": true
+          },
+          {
+            "name": "table",
+            "type": "select",
+            "label": "Table",
+            "required": true
+          },
+          {
+            "name": "record",
+            "type": "collection",
+            "label": "Record",
+            "spec": [
+              {
+                "name": "fldRvFocvp7Q8NjkB",
+                "type": "text",
+                "label": "Nome"
+              },
+              {
+                "name": "fldam6Aqd6PG9nibA",
+                "type": "select",
+                "label": "Tipo",
+                "mode": "edit"
+              },
+              {
+                "name": "fldsrM0YMYqTh8JgX",
+                "type": "text",
+                "label": "País/Cidade"
+              },
+              {
+                "name": "fldPMsYEo4nSHpn0b",
+                "type": "text",
+                "label": "Área de estudo"
+              },
+              {
+                "name": "fldIEv5HEy90QrAez",
+                "type": "text",
+                "label": "Requisitos"
+              },
+              {
+                "name": "fldmJaFvrtCYJ2GZA",
+                "type": "text",
+                "label": "Benefícios"
+              },
+              {
+                "name": "fldlMvL7ukJF9N70d",
+                "type": "text",
+                "label": "Link inscrição"
+              },
+              {
+                "name": "fldeYeGIc2bCqp1zK",
+                "type": "text",
+                "label": "Compatibilidade"
+              },
+              {
+                "name": "fldJY7JdSEYmeZ04G",
+                "type": "array",
+                "label": "Usuários Candidatados",
+                "spec": {
+                  "label": "Record ID",
+                  "name": "value"
+                }
+              }
+            ]
+          }
+        ],
+        "interface": [
+          {
+            "name": "id",
+            "type": "text",
+            "label": "ID"
+          },
+          {
+            "name": "createdTime",
+            "type": "date",
+            "label": "Created Time"
+          },
+          {
+            "name": "Nome",
+            "label": "Nome",
+            "type": "text"
+          },
+          {
+            "name": "Tipo",
+            "label": "Tipo",
+            "type": "text"
+          },
+          {
+            "name": "País/Cidade",
+            "label": "País/Cidade",
+            "type": "text"
+          },
+          {
+            "name": "Área de estudo",
+            "label": "Área de estudo",
+            "type": "text"
+          },
+          {
+            "name": "Requisitos",
+            "label": "Requisitos",
+            "type": "text",
+            "multiline": true
+          },
+          {
+            "name": "Benefícios",
+            "label": "Benefícios",
+            "type": "text",
+            "multiline": true
+          },
+          {
+            "name": "Link inscrição",
+            "label": "Link inscrição",
+            "type": "text"
+          },
+          {
+            "name": "Compatibilidade",
+            "label": "Compatibilidade",
+            "type": "text"
+          },
+          {
+            "name": "Usuários Candidatados",
+            "label": "Usuários Candidatados",
+            "type": "array",
+            "spec": {
+              "label": "Record ID"
+            }
+          },
+          {
+            "name": "Nº de Candidatos",
+            "label": "Nº de Candidatos",
+            "type": "number"
+          },
+          {
+            "name": "Resumo dos Benefícios",
+            "label": "Resumo dos Benefícios",
+            "type": "text"
+          },
+          {
+            "name": "Requisitos Principais",
+            "label": "Requisitos Principais",
+            "type": "text"
+          },
+          {
+            "name": "Compatibilidade (IA)",
+            "label": "Compatibilidade (IA)",
+            "type": "text"
+          },
+          {
+            "name": "Categoria da Oportunidade (IA)",
+            "label": "Categoria da Oportunidade (IA)",
+            "type": "text"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false,
+      "freshVariables": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "eu2.make.com",
+    "notes": []
+  }
+}
