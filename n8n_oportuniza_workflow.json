@@ -1,0 +1,190 @@
+{
+  "name": "oportuniza",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webhook-usuario",
+        "options": {}
+      },
+      "name": "Webhook Usuario",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        16,
+        -64
+      ],
+      "id": "06550181-935b-4fdd-b434-3b1e306ef644",
+      "webhookId": "c565d81f-b58c-4416-b245-8f5dc86dafef"
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "list",
+        "application": {
+          "__rl": true,
+          "value": "https://airtable.com/YOUR_AIRTABLE_BASE_ID/YOUR_SHARE_ID",
+          "mode": "url"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Oportunidades",
+          "mode": "id"
+        },
+        "additionalOptions": {}
+      },
+      "name": "Airtable - Get Opportunities",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        272,
+        -64
+      ],
+      "id": "1b53422a-bddf-4905-b2a9-405c71b305d2",
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "AdSYWgqcjLLrjxTW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [
+        528,
+        -64
+      ],
+      "id": "0f842b53-dd48-446a-91d0-4d11d2e46d42"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4",
+        "prompt": "Perfil do usuário:\nNome: {{$json[\"nome\"]}}\nIdade: {{$json[\"idade\"]}}\nGênero: {{$json[\"genero\"]}}\nCor/Raça: {{$json[\"cor_raca\"]}}\nEscolaridade: {{$json[\"escolaridade\"]}}\nÁrea de interesse: {{$json[\"area_interesse\"]}}\nRenda familiar: {{$json[\"renda_familiar\"]}}\nPaís de interesse: {{$json[\"pais_interesse\"]}}\nIdiomas: {{$json[\"idiomas\"]}}\n\nOportunidade:\nNome: {{$json[\"Nome\"]}}\nRequisitos: {{$json[\"Requisitos\"]}}\n\nRetorne uma nota de compatibilidade de 0 a 100.",
+        "options": {},
+        "requestOptions": {}
+      },
+      "name": "OpenAI - Compatibilidade",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        768,
+        -64
+      ],
+      "id": "45e98632-1922-4958-9988-ceb08d119087",
+      "credentials": {
+        "openAiApi": {
+          "id": "1u2WND2zNfVyLQ9i",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableTokenApi",
+        "operation": "update",
+        "application": {
+          "__rl": true,
+          "value": "https://airtable.com/YOUR_AIRTABLE_BASE_ID/YOUR_SHARE_ID",
+          "mode": "url"
+        },
+        "table": "Oportunidades",
+        "id": "={{$json[\"id\"]}}",
+        "options": {}
+      },
+      "name": "Airtable - Update Compatibilidade",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        -64
+      ],
+      "id": "ed353ac6-fdc8-4213-9abd-454c6a3f4522",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "AdSYWgqcjLLrjxTW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "5218af61-aeee-49d0-b4e7-5aa957af3ae7",
+        "options": {}
+      },
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        -64
+      ],
+      "id": "f88b580c-b2a7-43aa-8597-d627e144c4f4",
+      "webhookId": "5218af61-aeee-49d0-b4e7-5aa957af3ae7"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Usuario": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Get Opportunities",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable - Get Opportunities": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "OpenAI - Compatibilidade",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Compatibilidade": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Update Compatibilidade",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "db4ffdc7-b01d-452a-94ba-0074265feedf",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "558d88703fb65b2d0e44613bc35916258b0f0bf983c5d4730c00c424b77ca36a"
+  },
+  "id": "9AUIY14bnqrO33Pu",
+  "tags": []
+}
